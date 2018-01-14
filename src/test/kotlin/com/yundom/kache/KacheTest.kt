@@ -1,8 +1,8 @@
-package com.mojopot.kache
+package com.yundom.kache
 
-import com.mojopot.kache.map.FifoMap
-import com.mojopot.kache.map.LruMap
-import com.mojopot.kache.policy.ObjectCache
+import com.yundom.kache.map.FifoMap
+import com.yundom.kache.map.LruMap
+import com.yundom.kache.policy.ObjectCache
 import org.junit.Assert.*
 import org.junit.Test
 

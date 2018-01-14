@@ -1,4 +1,4 @@
-package com.mojopot.kache.map
+package com.yundom.kache.map
 
 class FifoMap<K, V>(private val capacity: Int) : MutableMap<K, V> {
     private var map: MutableMap<K, V> = object : LinkedHashMap<K, V>(capacity) {
