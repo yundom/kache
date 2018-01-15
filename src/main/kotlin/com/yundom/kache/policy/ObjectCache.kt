@@ -1,7 +1,7 @@
-package com.mojopot.kache.policy
+package com.yundom.kache.policy
 
-import com.mojopot.kache.Kache
-import com.mojopot.kache.map.FifoMap
+import com.yundom.kache.Kache
+import com.yundom.kache.map.FifoMap
 import java.lang.IllegalStateException
 
 open class ObjectCache<K, V>(private val capacity: Int = 10) : Kache<K, V> {

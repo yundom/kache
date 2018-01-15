@@ -1,4 +1,4 @@
-package com.mojopot.kache
+package com.yundom.kache
 
 interface Kache<K, V> {
     fun get(key: K): V?
