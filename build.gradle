@@ -13,7 +13,7 @@ buildscript {
 }
 
 group 'com.yundom'
-version '1.0.0'
+version '0.0.1'
 
 apply plugin: 'kotlin'
 apply plugin: 'com.jfrog.bintray'
@@ -29,12 +29,13 @@ bintray {
     pkg {
         repo = 'Kache'
         name = 'Kache'
+        desc = 'A lightweight cache library written in Kotlin'
         licenses = ['MIT']
         vcsUrl = 'https://github.com/yundom/kache'
         version {
-            name = 'v1.0.0'
+            name = 'v0.0.1'
             released = new Date()
-            vcsTag = '1.0.0'
+            vcsTag = '0.0.1'
         }
     }
 }
