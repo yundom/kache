@@ -1,6 +1,7 @@
 buildscript {
     ext.kotlin_version = '1.2.10'
     ext.junit_version = '4.12'
+    ext.version_name = '0.0.3'
 
     repositories {
         mavenCentral()
@@ -13,7 +14,7 @@ buildscript {
 }
 
 group 'com.yundom'
-version '0.0.2'
+version version_name
 
 apply plugin: 'kotlin'
 apply plugin: 'maven-publish'
@@ -23,13 +24,29 @@ repositories {
     mavenCentral()
 }
 
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar, javadocJar
+}
+
 publishing {
     publications {
         BintrayPublication(MavenPublication) {
             from components.java
             groupId 'com.yundom'
             artifactId 'kache'
-            version '0.0.2'
+            version version_name
+            artifact sourcesJar
+            artifact javadocJar
         }
     }
 }
@@ -45,9 +62,9 @@ bintray {
         licenses = ['MIT']
         vcsUrl = 'https://github.com/yundom/kache'
         version {
-            name = 'v0.0.2'
+            name = "v$version_name"
             released = new Date()
-            vcsTag = '0.0.2'
+            vcsTag = version_name
         }
     }
 }
