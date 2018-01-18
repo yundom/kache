@@ -1,8 +1,7 @@
 package com.yundom.kache
 
-import com.yundom.kache.map.FifoMap
-import com.yundom.kache.map.LruMap
-import com.yundom.kache.policy.ObjectCache
+import com.yundom.kache.config.FIFO
+import com.yundom.kache.config.LRU
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -10,18 +9,28 @@ class KacheTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun testZeroCapacity() {
-        ObjectCache<String, String>(0)
+        Builder.build<Int, String>({
+            policy = LRU
+            capacity = 0
+        })
     }
 
     @Test
     fun testMaxMemorySize() {
-        val kache: Kache<String, String> = ObjectCache(10)
-        assertEquals(10 * 1024 * 1024, kache.getMaxMemorySize())
+        val kache = Builder.build<Int, String>({
+            policy = LRU
+            capacity = 16
+        })
+
+        assertEquals(16 * 1024 * 1024, kache.getMaxMemorySize())
     }
 
     @Test
     fun testPutAndGet() {
-        val kache = ObjectCache<Int, String>(10)
+        val kache = Builder.build<Int, String>({
+            policy = LRU
+            capacity = 10
+        })
 
         for (i in 1..10) {
             assertNull(kache.put(i, i.toString()))
@@ -36,7 +45,11 @@ class KacheTest {
 
     @Test
     fun testRemove() {
-        val kache = ObjectCache<Int, String>(10)
+        val kache = Builder.build<Int, String>({
+            policy = LRU
+            capacity = 10
+        })
+
         for (i in 1..10) {
             assertNull(kache.put(i, i.toString()))
         }
@@ -53,7 +66,10 @@ class KacheTest {
 
     @Test
     fun testDuplicates() {
-        val kache = ObjectCache<Int, String>(10)
+        val kache = Builder.build<Int, String>({
+            policy = LRU
+            capacity = 10
+        })
 
         for (i in 1..10) {
             assertNull(kache.put(i, i.toString()))
@@ -72,17 +88,22 @@ class KacheTest {
 
     @Test
     fun testPreviousValue() {
-        val kache = ObjectCache<Int, String>(10)
+        val kache = Builder.build<Int, String>({
+            policy = LRU
+            capacity = 10
+        })
+
         assertNull(kache.put(1, 1.toString()))
         assertEquals(1.toString(), kache.put(1, 2.toString()))
         assertEquals(2.toString(), kache.put(1, 3.toString()))
     }
 
     @Test
-    fun testLruRule() {
-        val kache = ObjectCache<Int, String>(10, { capacity ->
-            LruMap(capacity)
-        })
+    fun testLruPolicy() {
+        val kache = Builder.build<Int, String> {
+            policy = LRU
+            capacity = 10
+        }
 
         for (i in 1..10) {
             assertNull(kache.put(i, i.toString()))
@@ -98,10 +119,11 @@ class KacheTest {
     }
 
     @Test
-    fun testFifoRule() {
-        val kache = ObjectCache<Int, String>(10, { capacity ->
-            FifoMap(capacity)
-        })
+    fun testFifoPolicy() {
+        val kache = Builder.build<Int, String> {
+            policy = FIFO
+            capacity = 10
+        }
 
         for (i in 1..10) {
             assertNull(kache.put(i, i.toString()))

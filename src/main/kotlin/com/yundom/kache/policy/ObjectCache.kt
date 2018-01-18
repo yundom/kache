@@ -4,7 +4,7 @@ import com.yundom.kache.Kache
 import com.yundom.kache.map.FifoMap
 import java.lang.IllegalStateException
 
-open class ObjectCache<K, V>(private val capacity: Int = 10) : Kache<K, V> {
+open class ObjectCache<K, V>(private val capacity: Int = DEFAULT_CAPACITY) : Kache<K, V> {
     companion object {
         private val DEFAULT_CAPACITY = 10
         private val REMOVE_ALL = -1
@@ -23,7 +23,10 @@ open class ObjectCache<K, V>(private val capacity: Int = 10) : Kache<K, V> {
 
     constructor() : this(DEFAULT_CAPACITY)
 
-    constructor(capacity: Int, getMap: (Int) -> MutableMap<K, V>) : this(DEFAULT_CAPACITY) {
+    constructor(capacity: Int, getMap: (Int) -> MutableMap<K, V>) : this(capacity) {
+        if (this@ObjectCache.capacity <= 0) {
+            throw IllegalArgumentException("capacity <= 0")
+        }
         map = getMap(capacity)
     }
 
