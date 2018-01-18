@@ -22,7 +22,7 @@ class KacheTest {
             capacity = 16
         })
 
-        assertEquals(16 * 1024 * 1024, kache.getMaxMemorySize())
+        assertEquals(16, kache.getMaxSize())
     }
 
     @Test
@@ -54,14 +54,14 @@ class KacheTest {
             assertNull(kache.put(i, i.toString()))
         }
 
-        val size = kache.getMemorySize()
+        val size = kache.getSize()
         assertEquals(10, size)
         val previous = kache.remove(4)
         assertEquals(previous, 4.toString())
-        assertEquals(size - 1, kache.getMemorySize())
+        assertEquals(size - 1, kache.getSize())
 
         kache.clear()
-        assertEquals(0, kache.getMemorySize())
+        assertEquals(0, kache.getSize())
     }
 
     @Test
@@ -75,7 +75,7 @@ class KacheTest {
             assertNull(kache.put(i, i.toString()))
         }
 
-        val memorySize = kache.getMemorySize()
+        val memorySize = kache.getSize()
 
         assertTrue(memorySize == 10)
 
@@ -83,7 +83,7 @@ class KacheTest {
             assertNotNull(kache.put(i, i.toString()))
         }
 
-        assertEquals(memorySize, kache.getMemorySize())
+        assertEquals(memorySize, kache.getSize())
     }
 
     @Test
