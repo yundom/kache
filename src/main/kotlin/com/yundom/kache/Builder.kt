@@ -5,7 +5,7 @@ import com.yundom.kache.config.LRU
 import com.yundom.kache.config.Policy
 import com.yundom.kache.map.FifoMap
 import com.yundom.kache.map.LruMap
-import com.yundom.kache.policy.ObjectCache
+import com.yundom.kache.store.ObjectCache
 
 class Builder {
     var policy: Policy = LRU
