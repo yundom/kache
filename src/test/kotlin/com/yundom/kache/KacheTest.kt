@@ -16,6 +16,13 @@ class KacheTest {
     }
 
     @Test
+    fun testDefaultConfigurations() {
+        val kache = Builder.build<Int, String>()
+
+        assertEquals(128, kache.getMaxSize())
+    }
+
+    @Test
     fun testMaxMemorySize() {
         val kache = Builder.build<Int, String>({
             policy = LRU

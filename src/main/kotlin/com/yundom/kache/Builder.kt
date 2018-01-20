@@ -7,12 +7,20 @@ import com.yundom.kache.map.FifoMap
 import com.yundom.kache.map.LruMap
 import com.yundom.kache.store.ObjectCache
 
+typealias Configurations = Builder.() -> Unit
+
 class Builder {
     var policy: Policy = LRU
-    var capacity: Int = 10
+    var capacity: Int = 128
 
     companion object {
-        inline fun <K, V> build(block: Builder.() -> Unit) = Builder().apply(block).build<K, V>()
+        fun <K, V> build(config: Configurations? = null): Kache<K, V> {
+            return Builder().apply {
+                config?.let {
+                    apply(it)
+                }
+            }.build()
+        }
     }
 
     fun <K, V> build(): Kache<K, V> {
