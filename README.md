@@ -8,7 +8,7 @@ A library to provide runtime in-memory cache, with options of LRU and FIFO.
 ## Installation
 Include the library in your `build.gradle`
 ```
-compile 'com.yundom:kache:0.0.3'
+compile 'com.yundom:kache:1.0.0'
 ```
 
 ## Usage
