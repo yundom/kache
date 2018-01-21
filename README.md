@@ -8,13 +8,16 @@ A library to provide runtime in-memory cache, with options of LRU and FIFO.
 ## Installation
 Include the library in your `build.gradle`
 ```
-compile 'com.yundom:kache:1.0.0'
+compile 'com.yundom:kache:1.0.1'
 ```
 
 ## Usage
-Kache has a very simple builder for you to configure and create cache instance. 
+Kache has a very simple builder for you to configure and create cache instance.
+ 
 Create a cache instance:
-		val cache = Builder.build<Int, String>()
+```kotlin
+val cache = Builder.build<Int, String>()
+```
 Then you will get:
 1. A cache instance with key of type `Int`, and value of type `String`.
 2. Default capacity is `128`.
