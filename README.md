@@ -12,8 +12,9 @@ compile 'com.yundom:kache:1.0.1'
 ```
 
 ## Usage
-Kache has a very simple builder for you to configure and create cache instance.
- 
+### Create a cache instance
+Kache provides a builder for you to configure and create cache instance.
+
 Create a cache instance:
 ```kotlin
 val cache = Builder.build<Int, String>()
@@ -30,7 +31,14 @@ val cache = Builder.build<Int, String>({
     capacity = 32
 })
 ```
+__Supported parameters__
 
+NAME | TYPE | VALUE
+-----|------|----
+policy | Policy | **FIFO** for first in first out cache, or **LRU** for least recently used cache.
+capacity | Int | The maximum size of the cache.
+
+### Cache operations
 Put an entry into the cache:
 ```kotlin
 cache.put(1, "Hello")  // [1 to "Hello"]
