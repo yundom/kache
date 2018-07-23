@@ -1,8 +1,8 @@
 ![Kache Logo](https://github.com/yundom/kache/blob/master/images/logo.png)
 
 # Kache
-[![CircleCI branch](https://img.shields.io/circleci/project/yundom/kache/master.svg)](https://circleci.com/gh/yundom/kache/tree/master)
-[![GitHub license](https://img.shields.io/github/license/yundom/kache.svg)](https://github.com/yundom/kache/blob/master/LICENSE)
+[![CircleCI branch](https://circleci.com/gh/yundom/kache.svg?style=shield&circle-token=656b534e746e391d3ab9bfbac01cb6b60a5ab087)](https://circleci.com/gh/yundom/kache/tree/master)
+[![GitHub license](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A library to provide runtime in-memory cache, with options of LRU and FIFO.
 ## Installation
