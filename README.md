@@ -10,7 +10,7 @@ A runtime in-memory cache.
 ## Installation
 Put this in your `build.gradle`
 ```
-implementation 'com.yundom:kache:1.0.3'
+implementation 'com.yundom:kache:x.x.x'
 ```
 
 Make sure `jcenter` is in your top-level `build.gradle` file.
