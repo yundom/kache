@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/android:api-28
 
     working_directory: ~/repo
 
@@ -22,14 +22,20 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           - v1-dependencies-
 
-      - run: gradle dependencies
+      - run:
+          name: Make Android Licenses
+          command: |
+            mkdir -p ${ANDROID_HOME}/licenses
+            echo $ANDROID_SDK_LICENSE > ${ANDROID_HOME}/licenses/android-sdk-license
+
+      - run: ./gradlew androidDependencies
 
       - save_cache:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
-        
-      - run: gradle test
+
+      - run: ./gradlew test
 
       - store_artifacts:
           path: build/reports
@@ -50,7 +56,7 @@ jobs:
 
     steps:
       - checkout
-      - run: gradle bintrayUpload
+      - run: ./gradlew bintrayUpload
 
 workflows:
   version: 2
