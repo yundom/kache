@@ -1,6 +1,7 @@
 ![Kache Logo](https://github.com/yundom/kache/blob/master/images/logo.png)
 
 # Kache
+[ ![Download](https://api.bintray.com/packages/yundom/Kache/Kache/images/download.svg) ](https://bintray.com/yundom/Kache/Kache/_latestVersion)
 [![CircleCI branch](https://circleci.com/gh/yundom/kache.svg?style=shield&circle-token=656b534e746e391d3ab9bfbac01cb6b60a5ab087)](https://circleci.com/gh/yundom/kache/tree/master)
 [![GitHub license](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
