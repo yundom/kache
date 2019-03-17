@@ -9,35 +9,35 @@ class KacheTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun testZeroCapacity() {
-        Builder.build<Int, String>({
+        Builder.build<Int, String> {
             policy = LRU
             capacity = 0
-        })
+        }
     }
 
     @Test
     fun testDefaultConfigurations() {
-        val kache = Builder.build<Int, String>()
+        val kache: Kache<Int, String> = Builder.build()
 
         assertEquals(128, kache.getMaxSize())
     }
 
     @Test
     fun testMaxMemorySize() {
-        val kache = Builder.build<Int, String>({
+        val kache: Kache<Int, String> = Builder.build {
             policy = LRU
             capacity = 16
-        })
+        }
 
         assertEquals(16, kache.getMaxSize())
     }
 
     @Test
     fun testPutAndGet() {
-        val kache = Builder.build<Int, String>({
+        val kache: Kache<Int, String> = Builder.build {
             policy = LRU
             capacity = 10
-        })
+        }
 
         for (i in 1..10) {
             assertNull(kache.put(i, i.toString()))
@@ -52,10 +52,10 @@ class KacheTest {
 
     @Test
     fun testRemove() {
-        val kache = Builder.build<Int, String>({
+        val kache: Kache<Int, String> = Builder.build {
             policy = LRU
             capacity = 10
-        })
+        }
 
         for (i in 1..10) {
             assertNull(kache.put(i, i.toString()))
@@ -73,10 +73,10 @@ class KacheTest {
 
     @Test
     fun testDuplicates() {
-        val kache = Builder.build<Int, String>({
+        val kache: Kache<Int, String> = Builder.build {
             policy = LRU
             capacity = 10
-        })
+        }
 
         for (i in 1..10) {
             assertNull(kache.put(i, i.toString()))
@@ -95,10 +95,10 @@ class KacheTest {
 
     @Test
     fun testPreviousValue() {
-        val kache = Builder.build<Int, String>({
+        val kache: Kache<Int, String> = Builder.build {
             policy = LRU
             capacity = 10
-        })
+        }
 
         assertNull(kache.put(1, 1.toString()))
         assertEquals(1.toString(), kache.put(1, 2.toString()))
@@ -107,7 +107,7 @@ class KacheTest {
 
     @Test
     fun testLruPolicy() {
-        val kache = Builder.build<Int, String> {
+        val kache: Kache<Int, String> = Builder.build {
             policy = LRU
             capacity = 10
         }
@@ -127,7 +127,7 @@ class KacheTest {
 
     @Test
     fun testFifoPolicy() {
-        val kache = Builder.build<Int, String> {
+        val kache: Kache<Int, String> = Builder.build {
             policy = FIFO
             capacity = 10
         }
