@@ -9,9 +9,17 @@ A runtime in-memory cache.
 ## Installation
 Put this in your `build.gradle`
 ```
-compile 'com.yundom:kache:1.0.3'
+implementation 'com.yundom:kache:1.0.3'
 ```
 
+Make sure `jcenter` is in your top-level `build.gradle` file.
+```
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+```
 ## Usage
 ### Create a cache instance
 Kache provides a simple DSL to create cache instance.
