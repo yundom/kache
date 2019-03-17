@@ -1,0 +1,64 @@
+group 'com.yundom'
+version version_name
+
+apply plugin: 'kotlin'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar, javadocJar
+}
+
+publishing {
+    publications {
+        BintrayPublication(MavenPublication) {
+            from components.java
+            groupId 'com.yundom'
+            artifactId 'kache'
+            version version_name
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+}
+
+bintray {
+    user = System.getenv("BINTRAY_USER_NAME") ?: ''
+    key = System.getenv("BINTRAY_API_KEY") ?: ''
+    publications = ['BintrayPublication']
+    pkg {
+        repo = 'Kache'
+        name = 'Kache'
+        desc = 'A lightweight cache library written in Kotlin'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/yundom/kache'
+        version {
+            name = "v$version_name"
+            released = new Date()
+            vcsTag = version_name
+        }
+    }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    testCompile "junit:junit:$junit_version"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}

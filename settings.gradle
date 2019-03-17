@@ -1,2 +1,4 @@
 rootProject.name = 'kache'
 
+include ':core'
+include ':sample'
