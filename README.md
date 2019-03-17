@@ -5,42 +5,47 @@
 [![GitHub license](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
 
-A library to provide runtime in-memory cache, with options of LRU and FIFO.
+A runtime in-memory cache.
 ## Installation
-Include the library in your `build.gradle`
+Put this in your `build.gradle`
 ```
-compile 'com.yundom:kache:1.0.2'
+compile 'com.yundom:kache:1.0.3'
 ```
 
 ## Usage
 ### Create a cache instance
-Kache provides a builder for you to configure and create cache instance.
+Kache provides a simple DSL to create cache instance.
 
-Create a cache instance:
+Create a cache instance with default policy `LRU` and capacity `128`:
 ```kotlin
-val cache = Builder.build<Int, String>()
+val cache: Kache<Int, String> = Builder.build()
 ```
-Then you will get:
-1. A cache instance with key of type `Int`, and value of type `String`.
-2. Default capacity is `128`.
-3. Default cache policy is `LRU`.
 
-Create a FIFO cache instance with capacity of 32:
+Create a FIFO cache instance with capacity of `32`:
 ```kotlin
-val cache = Builder.build<Int, String>({
+val fifoCache: Kache<Int, String> = Builder.build {
     policy = FIFO
     capacity = 32
-})
+}
 ```
+
+Create a LRU cache with capacity `1024`
+```kotlin
+val lruCache: Kache<Int, String> = Builder.build {
+    policy = LRU
+    capacity = 1024
+}
+```
+
 __Supported parameters__
 
 NAME | TYPE | VALUE
 -----|------|----
-policy | Policy | **FIFO** for first in first out cache, or **LRU** for least recently used cache.
+policy | Policy | `FIFO` for first in first out cache, or `LRU` for least recently used cache.
 capacity | Int | The maximum size of the cache.
 
 ### Cache operations
-Put an entry into the cache:
+Put an entry in the cache:
 ```kotlin
 cache.put(1, "Hello")  // [1 to "Hello"]
 cache.put(2, "World") // [1 to "Hello", 2 to "World"]

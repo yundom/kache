@@ -14,21 +14,22 @@ class Builder {
     var capacity: Int = 128
 
     companion object {
-        fun <K, V> build(config: Configurations? = null): Kache<K, V> {
+        inline fun <K, V> build(config: Configurations = {
+            policy = LRU
+            capacity = 128
+        }): Kache<K, V> {
             return Builder().apply {
-                config?.let {
-                    apply(it)
-                }
+                apply(config)
             }.build()
         }
     }
 
     fun <K, V> build(): Kache<K, V> {
-        return ObjectCache(capacity, { capacity ->
+        return ObjectCache(capacity) { capacity ->
             when (policy) {
                 LRU -> LruMap<K, V>(capacity)
                 FIFO -> FifoMap<K, V>(capacity)
             }
-        })
+        }
     }
 }
