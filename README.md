@@ -65,6 +65,12 @@ Get an entry from the cache:
 cache.get(1)  // return the value "Hello"
 ```
 
+Check the key :
+```kotlin
+cache.put(2, "World")
+cache.exists(2) // return true
+```
+
 Return null if the key does not exist.
 ```kotlin
 cache.get(4) // return null

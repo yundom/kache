@@ -10,6 +10,14 @@ interface Kache<K, V> {
     fun get(key: K): V?
 
     /**
+     * Check if exists key
+     *
+     * @param key the key
+     * @return the boolean value
+     */
+    fun exist(key: K): Boolean
+
+    /**
      * Puts a value with the given key
      *
      * @param key the key
