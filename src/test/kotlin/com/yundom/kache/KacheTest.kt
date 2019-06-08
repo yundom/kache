@@ -51,6 +51,21 @@ class KacheTest {
     }
 
     @Test
+    fun testExistKey() {
+        val kache: Kache<Int, String> = Builder.build {
+            policy = LRU
+            capacity = 10
+        }
+
+        for (i in 1..10) {
+            assertNull(kache.put(i, i.toString()))
+        }
+
+        assertTrue(kache.exist(5))
+        assertFalse(kache.exist(11))
+    }
+
+    @Test
     fun testRemove() {
         val kache: Kache<Int, String> = Builder.build {
             policy = LRU

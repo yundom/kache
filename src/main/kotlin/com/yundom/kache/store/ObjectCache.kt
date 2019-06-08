@@ -4,8 +4,9 @@ import com.yundom.kache.Kache
 import com.yundom.kache.map.FifoMap
 
 open class ObjectCache<K, V>(private val capacity: Int = DEFAULT_CAPACITY) : Kache<K, V> {
+
     companion object {
-        private val DEFAULT_CAPACITY = 10
+        private const val DEFAULT_CAPACITY = 10
     }
 
     private val maxSize = capacity
@@ -27,27 +28,21 @@ open class ObjectCache<K, V>(private val capacity: Int = DEFAULT_CAPACITY) : Kac
         map = getMap(capacity)
     }
 
-    @Synchronized override fun get(key: K): V? {
-        return map[key]
-    }
+    @Synchronized
+    override fun get(key: K): V? = map[key]
 
-    @Synchronized override fun put(key: K, value: V): V? {
-        return map.put(key, value)
-    }
+    @Synchronized
+    override fun put(key: K, value: V): V? = map.put(key, value)
 
-    @Synchronized override fun remove(key: K): V? {
-        return map.remove(key)
-    }
+    @Synchronized
+    override fun remove(key: K): V? = map.remove(key)
 
-    override fun clear() {
-        map.clear()
-    }
+    override fun exist(key: K): Boolean = map.containsKey(key)
 
-    override fun getMaxSize(): Int {
-        return maxSize
-    }
+    override fun clear() = map.clear()
 
-    override fun getSize(): Int {
-        return map.size
-    }
+    override fun getMaxSize(): Int = maxSize
+
+    override fun getSize(): Int = map.size
+
 }
