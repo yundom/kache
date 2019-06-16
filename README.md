@@ -10,7 +10,7 @@ A runtime in-memory cache.
 ## Installation
 Put this in your `build.gradle`
 ```
-implementation 'com.yundom:kache:1.0.3'
+implementation 'com.yundom:kache:x.x.x'
 ```
 
 Make sure `jcenter` is in your top-level `build.gradle` file.
@@ -63,6 +63,12 @@ cache.put(2, "World") // [1 to "Hello", 2 to "World"]
 Get an entry from the cache:
 ```kotlin
 cache.get(1)  // return the value "Hello"
+```
+
+Check the key :
+```kotlin
+cache.put(2, "World")
+cache.exists(2) // return true
 ```
 
 Return null if the key does not exist.
