@@ -1,3 +1,6 @@
+```
+[NEW] Released to Maven Central: 'com.github.yundom:kache:1.x.x'
+```
 ![Kache Logo](https://github.com/yundom/kache/blob/master/images/logo.png)
 
 # Kache
@@ -10,7 +13,7 @@ A runtime in-memory cache.
 ## Installation
 Put this in your `build.gradle`
 ```
-implementation 'com.yundom:kache:x.x.x'
+implementation 'com.github.yundom:kache:x.x.x'
 ```
 
 Make sure `jcenter` is in your top-level `build.gradle` file.
