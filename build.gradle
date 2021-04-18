@@ -1,7 +1,7 @@
 buildscript {
     ext.kotlin_version = '1.4.31'
     ext.junit_version = '4.12'
-    ext.version_name = '1.0.5'
+    ext.version_name = '1.0.6'
 
     repositories {
         mavenCentral()
@@ -17,7 +17,7 @@ buildscript {
 ext {
     GROUP = "com.github.yundom"
     POM_ARTIFACT_ID = "kache"
-    VERSION_NAME = "1.0.5"
+    VERSION_NAME = ext.version_name
 
     POM_NAME = "Kache"
     POM_DESCRIPTION = "A lightweight cache library written in Kotlin"

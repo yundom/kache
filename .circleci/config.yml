@@ -56,13 +56,13 @@ jobs:
 
       - run:
           name: "Import GPG key"
-          command: echo -e $GPG_KEY | gpg --import
+          command: echo -e $GPG_KEY | gpg --batch --import
 
       - run:
-          name: "Decrypt secrets"
-          command: gpg --no-tty --batch --passphrase $GPG_PASSPHRASE --pinentry-mode loopback --output secrets.env --decrypt private-yundom-553796FE.gpg
+          name: "Export to key file"
+          command: gpg --pinentry-mode loopback --passphrase $GPG_PASSPHRASE --export-secret-keys > ~/repo/private-yundom-553796FE.gpg
 
-      - run: gradle publish
+      - run: gradle publish --stacktrace
 
 workflows:
   version: 2
