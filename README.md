@@ -16,11 +16,11 @@ Put this in your `build.gradle`
 implementation 'com.github.yundom:kache:x.x.x'
 ```
 
-Make sure `jcenter` is in your top-level `build.gradle` file.
+Make sure `mavenCentral()` is in your top-level `build.gradle` file.
 ```
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
     }
 }
 ```
