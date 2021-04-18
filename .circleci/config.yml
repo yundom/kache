@@ -50,7 +50,19 @@ jobs:
 
     steps:
       - checkout
-      - run: gradle bintrayUpload
+      - run:
+          name: "Setup gradle.properties"
+          command: echo -e $GRADLE_PROPERTIES > gradle.properties
+
+      - run:
+          name: "Import GPG key"
+          command: echo -e $GPG_KEY | gpg --import
+
+      - run:
+          name: "Decrypt secrets"
+          command: gpg --no-tty --batch --passphrase $GPG_PASSPHRASE --pinentry-mode loopback --output secrets.env --decrypt private-yundom-553796FE.gpg
+
+      - run: gradle publish
 
 workflows:
   version: 2
