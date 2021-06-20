@@ -50,7 +50,19 @@ jobs:
 
     steps:
       - checkout
-      - run: gradle bintrayUpload
+      - run:
+          name: "Setup gradle.properties"
+          command: echo -e $GRADLE_PROPERTIES > gradle.properties
+
+      - run:
+          name: "Import GPG key"
+          command: echo -e $GPG_KEY | gpg --batch --import
+
+      - run:
+          name: "Export to key file"
+          command: gpg --pinentry-mode loopback --passphrase $GPG_PASSPHRASE --export-secret-keys > ~/repo/private-yundom-553796FE.gpg
+
+      - run: gradle publish --stacktrace
 
 workflows:
   version: 2
